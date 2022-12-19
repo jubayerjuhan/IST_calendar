@@ -6,7 +6,7 @@ import moment from "moment";
 
 export default function App() {
   const [date, setDate] = useState(Date.now());
-
+  console.log('Hello World...')
   return (
     <View style={styles.container}>
       <View style={styles.subcontainer}>
