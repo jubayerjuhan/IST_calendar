@@ -11,10 +11,12 @@ import CalendarPicker from "react-native-calendar-picker";
 import moment from "moment";
 import AddTask from "./components/AddTask.js";
 import RoundButton from "./components/RoundButton.js";
+import AllTasks from "./components/AllTasks.js";
 
 export default function App() {
   const [addTaskVisible, setAddTaskVisible] = useState(false);
   const [date, setDate] = useState(Date.now());
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const customDatesStyles = [
     {
       date: moment().add(2, "days"),
@@ -50,8 +52,9 @@ export default function App() {
           onMonthChange={(date) => console.log(date, "date...")}
           selectedDayColor={"blue"}
           selectedDayTextColor={"white"}
-          onDateChange={() => console.log("Changed...")}
+          onDateChange={(date) => setSelectedDate(date)}
         />
+        <AllTasks selectedDate={selectedDate} />
       </View>
       <AddTask
         setAddTaskVisible={setAddTaskVisible}

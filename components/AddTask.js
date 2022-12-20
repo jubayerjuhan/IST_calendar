@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { Platform } from "react-native";
 import {
   View,
   StyleSheet,
@@ -15,19 +16,35 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import moment from "moment";
 import { colors } from "../colors.js";
 import { Formik } from "formik";
+import {
+  addTaskToStorage,
+  getTasksFromStorage,
+  setValueToStorage,
+} from "../storage/storage.js";
 
 const AddTask = ({ setAddTaskVisible, addTaskVisible }) => {
   const [date, setDate] = useState(moment().format("L"));
   const [open, setOpen] = useState(false);
 
-  const onChangeInputText = (inputValue) => {
-    console.log(inputValue);
-  };
   const inputValues = [
     { name: "title", placeHolder: "Title Of Your Task" },
     { name: "description", placeHolder: "Description" },
   ];
-  console.log(date);
+
+  useEffect(() => {
+    getAlltasks();
+  }, []);
+
+  const getAlltasks = async () => {
+    const tasks = await getTasksFromStorage("task");
+  };
+
+  // handle submit of the task
+  const handleAddTask = (values) => {
+    addTaskToStorage("task", { ...values, date, checked: false });
+    setAddTaskVisible(false);
+  };
+
   return (
     <Modal
       transparent={true}
@@ -40,9 +57,16 @@ const AddTask = ({ setAddTaskVisible, addTaskVisible }) => {
     >
       <View style={[{ width: "100%", height: "100%" }, styles.container]}>
         <Text style={styles.header}>Add Task</Text>
-        <Formik initialValues={{}} onSubmit={(values) => console.log(values)}>
+        <TouchableOpacity
+          onPress={() => setAddTaskVisible(false)}
+          style={styles.closeBtn}
+        >
+          <FontAwesome5 name="times" size={24} color={colors.primary} />
+        </TouchableOpacity>
+        <Formik initialValues={{}} onSubmit={(values) => handleAddTask(values)}>
           {({ handleChange, handleBlur, handleSubmit, values }) => (
             <FlatList
+              showsVerticalScrollIndicator={false}
               data={inputValues}
               style={styles.flatList}
               renderItem={({ item }) => {
@@ -66,7 +90,10 @@ const AddTask = ({ setAddTaskVisible, addTaskVisible }) => {
                   </View>
                   {open && (
                     <DateTimePicker
-                      onChange={(date) => setDate(date.nativeEvent.timestamp)}
+                      onChange={(date) => {
+                        setDate(date.nativeEvent.timestamp);
+                        setOpen(false);
+                      }}
                       display="date"
                       value={new Date(date)}
                     />
@@ -79,7 +106,7 @@ const AddTask = ({ setAddTaskVisible, addTaskVisible }) => {
                   ></Button>
                 </View>
               )}
-              // keyExtractor={(item) => item.id}
+              keyExtractor={(item) => item.name}
             />
           )}
         </Formik>
@@ -110,7 +137,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 30,
     paddingHorizontal: 20,
-    maxHeight: 340,
+    maxHeight: 300,
     position: "absolute",
     bottom: 0,
     backgroundColor: "white",
@@ -143,6 +170,12 @@ const styles = StyleSheet.create({
   },
   editButton: {
     fontSize: 15,
+    color: colors.primary,
+  },
+  closeBtn: {
+    position: "absolute",
+    top: 20,
+    right: 20,
     color: colors.primary,
   },
 });

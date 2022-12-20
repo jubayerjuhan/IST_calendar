@@ -11,8 +11,10 @@
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
     "@mui/icons-material": "^5.11.0",
+    "@react-native-community/checkbox": "^0.5.14",
     "@react-native-community/datetimepicker": "^6.7.1",
     "expo": "~47.0.8",
+    "expo-checkbox": "~2.2.2",
     "expo-status-bar": "~1.4.2",
     "formik": "^2.2.9",
     "moment": "^2.29.4",
