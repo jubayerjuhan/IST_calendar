@@ -20,9 +20,10 @@ import {
   setValueToStorage,
 } from "../storage/storage.js";
 
-const AddTask = ({ setAddTaskVisible, addTaskVisible }) => {
-  const [date, setDate] = useState(moment().format("L"));
+const AddTask = ({ setAddTaskVisible, addTaskVisible, selectedDate }) => {
+  const [date, setDate] = useState(moment(selectedDate).format("L"));
   const [open, setOpen] = useState(false);
+  console.log(date, "current date of the page...");
 
   const inputValues = [
     { name: "title", placeHolder: "Title Of Your Task" },
@@ -35,11 +36,12 @@ const AddTask = ({ setAddTaskVisible, addTaskVisible }) => {
 
   const getAlltasks = async () => {
     const tasks = await getTasksFromStorage("task");
+    return tasks;
   };
 
   // handle submit of the task
   const handleAddTask = (values) => {
-    addTaskToStorage("task", { ...values, date, checked: false });
+    addTaskToStorage("task", { ...values, date: selectedDate, checked: false });
     setAddTaskVisible(false);
   };
 
@@ -80,22 +82,9 @@ const AddTask = ({ setAddTaskVisible, addTaskVisible }) => {
                 <View>
                   <View style={styles.dateContainer}>
                     <Text style={styles.date}>
-                      Date : {moment(date).format("MMM Do YYYY")}
+                      Date : {moment(selectedDate).format("MMM Do YYYY")}
                     </Text>
-                    <TouchableOpacity onPress={() => setOpen(!open)}>
-                      <Text style={styles.editButton}>Edit</Text>
-                    </TouchableOpacity>
                   </View>
-                  {open && (
-                    <DateTimePicker
-                      onChange={(date) => {
-                        setDate(date.nativeEvent.timestamp);
-                        setOpen(false);
-                      }}
-                      display="date"
-                      value={new Date(date)}
-                    />
-                  )}
                   <Button
                     color={colors.primary}
                     style={styles.submitBtn}
@@ -108,8 +97,6 @@ const AddTask = ({ setAddTaskVisible, addTaskVisible }) => {
             />
           )}
         </Formik>
-
-        <View></View>
       </View>
     </Modal>
   );
@@ -135,7 +122,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 30,
     paddingHorizontal: 20,
-    maxHeight: 300,
+    maxHeight: 310,
     position: "absolute",
     bottom: 0,
     backgroundColor: "white",

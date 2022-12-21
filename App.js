@@ -12,21 +12,18 @@ import moment from "moment";
 import AddTask from "./components/AddTask.js";
 import RoundButton from "./components/RoundButton.js";
 import AllTasks from "./components/AllTasks.js";
+import { closeDays } from "./storage/closedDays";
 
 export default function App() {
   const [addTaskVisible, setAddTaskVisible] = useState(false);
   const [date, setDate] = useState(Date.now());
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const customDatesStyles = [
-    {
-      date: moment().add(2, "days"),
-      style: {
-        backgroundColor: "white",
-      },
-      textStyle: { color: "red" },
-      allowDisabled: true,
-    },
-  ];
+  let customDatesStyles = [];
+  const [offDays, setOffDays] = useState(customDatesStyles);
+
+  useEffect(() => {
+    closeDays.forEach((closeDay) => {});
+  }, []);
 
   return (
     <SafeAreaView>
@@ -44,8 +41,12 @@ export default function App() {
           </View>
         </View>
         <CalendarPicker
+          // weekdays={["fri"]}
+
           todayBackgroundColor="#E66702"
-          customDatesStyles={customDatesStyles}
+          customDatesStyles={closeDays}
+          value={new Date()}
+          // customDayHeaderStyles={}
           todayTextStyle={{
             color: "#ffff",
           }}
@@ -54,9 +55,10 @@ export default function App() {
           selectedDayTextColor={"white"}
           onDateChange={(date) => setSelectedDate(date)}
         />
-        <AllTasks selectedDate={selectedDate} />
+        <AllTasks addTaskVisible={addTaskVisible} selectedDate={selectedDate} />
       </View>
       <AddTask
+        selectedDate={selectedDate}
         setAddTaskVisible={setAddTaskVisible}
         addTaskVisible={addTaskVisible}
       />

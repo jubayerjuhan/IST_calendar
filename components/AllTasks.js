@@ -2,6 +2,7 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, FlatList } from "react-native";
 import Checkbox from "expo-checkbox";
+import { closeDays } from "../storage/closedDays";
 import {
   getSelectedDaysTask,
   getTasksFromStorage,
@@ -15,7 +16,7 @@ const AllTasks = ({ selectedDate, addTaskVisible }) => {
   const [todaysTasks, settodaysTasks] = useState([]);
   useEffect(() => {
     getTasks();
-  }, [selectedDate]);
+  }, [selectedDate, addTaskVisible]);
 
   const getTasks = async () => {
     const tasks = await getSelectedDaysTask(selectedDate);
@@ -28,8 +29,16 @@ const AllTasks = ({ selectedDate, addTaskVisible }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>
-        Tasks Of {moment(selectedDate).format("MMM Do YY")}
+        Tasks Of {moment(selectedDate).format("MMMM Do")}
       </Text>
+      {/* <FlatList
+        data={closeDays}
+        keyExtractor={(item) => item.date}
+        renderItem={() => {
+          if (moment(selectedDate) !== moment(selectedDate)) return <></>;
+          return <Text>Hello</Text>;
+        }}
+      /> */}
       <FlatList
         data={todaysTasks}
         keyExtractor={(item) => Math.random(1)}
