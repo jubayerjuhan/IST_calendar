@@ -5,10 +5,13 @@ import Checkbox from "expo-checkbox";
 import {
   getSelectedDaysTask,
   getTasksFromStorage,
+  toggleTaskChecked,
 } from "../storage/storage.js";
 import { colors } from "../colors.js";
+import Task from "./Task.js";
 
 const AllTasks = ({ selectedDate, addTaskVisible }) => {
+  console.log("selected date...", moment(selectedDate).format("DD-MM-YY"));
   const [todaysTasks, settodaysTasks] = useState([]);
   useEffect(() => {
     getTasks();
@@ -31,21 +34,7 @@ const AllTasks = ({ selectedDate, addTaskVisible }) => {
         data={todaysTasks}
         keyExtractor={(item) => Math.random(1)}
         renderItem={({ item }) => {
-          return (
-            <View style={styles.task}>
-              <Checkbox
-                style={styles.checkbox}
-                value={false}
-                color={true ? colors.primary : undefined}
-              />
-              <View>
-                <Text style={styles.title}>{item.title}</Text>
-                {item.description && (
-                  <Text style={styles.description}>{item.description}</Text>
-                )}
-              </View>
-            </View>
-          );
+          return <Task item={item} />;
         }}
       ></FlatList>
     </View>
@@ -62,21 +51,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     fontSize: 16,
     fontWeight: "600",
-  },
-  task: {
-    marginBottom: 10,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  checkbox: {
-    marginRight: 10,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: "800",
-  },
-  description: {
-    fontSize: 14,
   },
 });
 

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { Platform } from "react-native";
 import {
   View,
   StyleSheet,
@@ -9,7 +8,6 @@ import {
   Button,
   TextInput,
   FlatList,
-  TouchableHighlight,
   TouchableOpacity,
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";

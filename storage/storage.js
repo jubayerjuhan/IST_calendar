@@ -45,4 +45,31 @@ const getSelectedDaysTask = async (date) => {
   }
 };
 
-export { addTaskToStorage, getTasksFromStorage, getSelectedDaysTask };
+const toggleTaskChecked = async (id) => {
+  console.log(id, "id of current task");
+  const tasks = JSON.parse(await AsyncStorage.getItem("task"));
+
+  tasks?.forEach(async (task) => {
+    if (task.date === id) {
+      const excludeMatchedTask = tasks.filter(
+        (currentTask) => currentTask.date !== id
+      );
+      task.checked = !task.checked;
+      excludeMatchedTask.push(task);
+
+      await AsyncStorage.setItem("task", JSON.stringify(excludeMatchedTask));
+      console.log(excludeMatchedTask);
+    }
+  });
+  try {
+  } catch (error) {
+    console.log(error, "Task Change Error....");
+  }
+};
+
+export {
+  addTaskToStorage,
+  getTasksFromStorage,
+  getSelectedDaysTask,
+  toggleTaskChecked,
+};
