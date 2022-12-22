@@ -12,15 +12,16 @@ import { colors } from "../colors.js";
 import Task from "./Task.js";
 
 const AllTasks = ({ selectedDate, addTaskVisible }) => {
+  console.log(addTaskVisible, "add task visible..............");
   console.log("selected date...", moment(selectedDate).format("DD-MM-YY"));
   const [todaysTasks, settodaysTasks] = useState([]);
   useEffect(() => {
     getTasks();
+    console.log("task process");
   }, [selectedDate, addTaskVisible]);
 
   const getTasks = async () => {
     const tasks = await getSelectedDaysTask(selectedDate);
-    console.log(tasks, "Taskss...");
     settodaysTasks(tasks);
   };
 
@@ -41,6 +42,7 @@ const AllTasks = ({ selectedDate, addTaskVisible }) => {
       /> */}
       <FlatList
         data={todaysTasks}
+        style={{ height: 285 }}
         keyExtractor={(item) => Math.random(1)}
         renderItem={({ item }) => {
           return <Task item={item} />;

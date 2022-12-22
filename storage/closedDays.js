@@ -1,6 +1,6 @@
 import moment from "moment/moment.js";
 
-const styles = {
+export const closedDaysStyles = {
   style: {
     backgroundColor: "white",
   },
@@ -12,18 +12,22 @@ const styles = {
 export const closeDays = [
   {
     date: moment("2022/08/28"),
-    ...styles,
+    ...closedDaysStyles,
   },
   {
     date: moment("2022/05/18"),
-    ...styles,
+    ...closedDaysStyles,
   },
   {
     date: moment("2022/12/19"),
-    ...styles,
+    ...closedDaysStyles,
   },
   {
     date: moment("2023/01/01"),
-    ...styles,
+    ...closedDaysStyles,
+  },
+  {
+    date: moment("2022/12/30"),
+    ...closedDaysStyles,
   },
 ];

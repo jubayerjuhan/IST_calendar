@@ -1,6 +1,5 @@
 import moment from "moment";
 import { AsyncStorage } from "react-native";
-
 const addTaskToStorage = async (key, incomingValue) => {
   try {
     const storageValue = await AsyncStorage.getItem(key);

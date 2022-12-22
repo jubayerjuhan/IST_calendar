@@ -41,8 +41,13 @@ const AddTask = ({ setAddTaskVisible, addTaskVisible, selectedDate }) => {
 
   // handle submit of the task
   const handleAddTask = (values) => {
-    addTaskToStorage("task", { ...values, date: selectedDate, checked: false });
-    setAddTaskVisible(false);
+    addTaskToStorage("task", {
+      ...values,
+      date: selectedDate,
+      checked: false,
+    }).then(() => {
+      setAddTaskVisible(false);
+    });
   };
 
   return (

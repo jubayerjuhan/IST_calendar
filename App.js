@@ -12,18 +12,32 @@ import moment from "moment";
 import AddTask from "./components/AddTask.js";
 import RoundButton from "./components/RoundButton.js";
 import AllTasks from "./components/AllTasks.js";
-import { closeDays } from "./storage/closedDays";
+import { closeDays, closedDaysStyles } from "./storage/closedDays";
 
 export default function App() {
   const [addTaskVisible, setAddTaskVisible] = useState(false);
   const [date, setDate] = useState(Date.now());
   const [selectedDate, setSelectedDate] = useState(new Date());
   let customDatesStyles = [];
+  const [month, setMonth] = useState(new Date().setDate(1));
   const [offDays, setOffDays] = useState(customDatesStyles);
-
+  const [fridays, setFridays] = useState([]);
   useEffect(() => {
-    closeDays.forEach((closeDay) => {});
-  }, []);
+    let AllDates = [];
+    for (let i = 0; i < moment(month).daysInMonth(); i++) {
+      let newDAte = moment(month).add(i, "days");
+      if (new Date(newDAte).getDay() === 5) {
+        AllDates.push({
+          ...closedDaysStyles,
+          date: newDAte,
+        });
+      }
+    }
+    setFridays([...AllDates]);
+  }, [month]);
+
+  console.log(closeDays, "cloised days...");
+  console.log(fridays, "cloised days...");
 
   return (
     <SafeAreaView>
@@ -42,15 +56,14 @@ export default function App() {
         </View>
         <CalendarPicker
           // weekdays={["fri"]}
-
           todayBackgroundColor="#E66702"
-          customDatesStyles={closeDays}
+          customDatesStyles={[...closeDays, ...fridays]}
           value={new Date()}
           // customDayHeaderStyles={}
           todayTextStyle={{
             color: "#ffff",
           }}
-          onMonthChange={(date) => console.log(date, "date...")}
+          onMonthChange={(month) => setMonth(month)}
           selectedDayColor={"blue"}
           selectedDayTextColor={"white"}
           onDateChange={(date) => setSelectedDate(date)}
