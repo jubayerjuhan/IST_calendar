@@ -13,6 +13,7 @@
     "@mui/icons-material": "^5.11.0",
     "@react-native-community/checkbox": "^0.5.14",
     "@react-native-community/datetimepicker": "^6.7.1",
+    "axios": "^1.2.1",
     "expo": "~47.0.8",
     "expo-checkbox": "~2.2.2",
     "expo-status-bar": "~1.4.2",

@@ -13,11 +13,15 @@ import AddTask from "./components/AddTask.js";
 import RoundButton from "./components/RoundButton.js";
 import AllTasks from "./components/AllTasks.js";
 import { closeDays, closedDaysStyles } from "./storage/closedDays";
+import axios from "axios";
 
 export default function App() {
   const [addTaskVisible, setAddTaskVisible] = useState(false);
   const [date, setDate] = useState(Date.now());
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [pictureOfTheDay, setPictureOfTheDay] = useState("");
+
+  // off days and fridays
   let customDatesStyles = [];
   const [month, setMonth] = useState(new Date().setDate(1));
   const [offDays, setOffDays] = useState(customDatesStyles);
@@ -36,6 +40,16 @@ export default function App() {
     setFridays([...AllDates]);
   }, [month]);
 
+  useEffect(() => {
+    axios
+      .get(
+        "https://api.nasa.gov/planetary/apod?api_key=dwqfO97gfc1H8BcsQ6IxrQ8gq8rXFdKVvsrV90PG"
+      )
+      .then((res) => {
+        setPictureOfTheDay(res.data.url);
+      });
+  }, []);
+
   console.log(closeDays, "cloised days...");
   console.log(fridays, "cloised days...");
 
@@ -45,7 +59,7 @@ export default function App() {
         <View style={styles.subcontainer}>
           <Image
             source={{
-              uri: "https://img.freepik.com/free-photo/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807.jpg?w=740&t=st=1671301137~exp=1671301737~hmac=90d4dfc7b7649e6f4a606367e7d582aff6119978a4e27ef82fdb89fafcaac2f6",
+              uri: pictureOfTheDay ? pictureOfTheDay : "",
             }}
             style={styles.image}
           />
