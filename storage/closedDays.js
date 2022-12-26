@@ -2,7 +2,7 @@ import moment from "moment/moment.js";
 
 export const closedDaysStyles = {
   style: {
-    backgroundColor: "white",
+    // backgroundColor: "white",
   },
   textStyle: { color: "red" }, // sets the font color
   containerStyle: [], // extra styling for day container
