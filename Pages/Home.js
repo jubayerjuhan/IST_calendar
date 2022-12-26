@@ -38,7 +38,7 @@ const Home = ({ navigation }) => {
         />
         <BigTabButton
           navigation={navigation}
-          url={"tel:"}
+          phone={"01620692839"}
           title={"Call Us"}
           icon={<AntDesign name="phone" size={30} color={colors.primary} />}
         />

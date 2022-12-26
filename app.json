@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "ist_calender",
+    "name": "IST Calander",
     "slug": "ist_calender",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/istlogo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",

@@ -2,9 +2,10 @@ import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import * as Linking from "expo-linking";
 
-const BigTabButton = ({ title, icon, navigation, page, url }) => {
+const BigTabButton = ({ title, icon, navigation, page, url, phone }) => {
   const handlePress = () => {
     if (page) return navigation.navigate(`${page}`);
+    if (phone) return Linking.openURL(`tel: ${phone}`);
     Linking.openURL(url);
   };
   return (
