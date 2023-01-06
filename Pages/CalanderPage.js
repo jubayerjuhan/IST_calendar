@@ -28,6 +28,13 @@ export default function CalanderPage() {
     let AllDates = [];
     for (let i = 0; i < moment(month).daysInMonth(); i++) {
       let newDAte = moment(month).add(i, "days");
+      console.log(new Date(newDAte).getDay(), "date...");
+      if (new Date(newDAte).getDay() === 6) {
+        AllDates.push({
+          ...closedDaysStyles,
+          date: newDAte,
+        });
+      }
       if (new Date(newDAte).getDay() === 5) {
         AllDates.push({
           ...closedDaysStyles,

@@ -7,6 +7,7 @@ import {
   Text,
   StatusBar,
   Image,
+  TouchableOpacity,
 } from "react-native";
 import istLogo from "../assets/istlogo.png";
 import { Entypo } from "@expo/vector-icons";
@@ -33,22 +34,25 @@ const Home = ({ navigation }) => {
         <BigTabButton
           navigation={navigation}
           url={"https://ist.edu.bd"}
-          title={"Website"}
+          title={"Visit Us"}
           icon={<Entypo name="globe" size={30} color={colors.primary} />}
         />
         <BigTabButton
           navigation={navigation}
-          phone={"01620692839"}
+          phone={"+88 02-55029352"}
           title={"Call Us"}
           icon={<AntDesign name="phone" size={30} color={colors.primary} />}
         />
         <BigTabButton
           navigation={navigation}
-          url={"https://www.linkedin.com/in/jubayerjuhan/"}
-          title={"Developer"}
+          url={"https://pcist.ist.edu.bd"}
+          title={"Visit pcIST"}
           icon={<Entypo name="code" size={30} color={colors.primary} />}
         />
       </View>
+      <TouchableOpacity>
+        {/* <Text>Developed By :Jubayer Juhan</Text> */}
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };

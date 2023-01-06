@@ -11,23 +11,87 @@ export const closedDaysStyles = {
 
 export const closeDays = [
   {
-    date: moment("2022/08/28"),
+    date: moment("2023/02/21"),
     ...closedDaysStyles,
   },
   {
-    date: moment("2022/05/18"),
+    date: moment("2023/03/8"),
     ...closedDaysStyles,
   },
   {
-    date: moment("2022/12/19"),
+    date: moment("2023/03/26"),
     ...closedDaysStyles,
   },
   {
-    date: moment("2023/01/01"),
+    date: moment("2023/03/17"),
     ...closedDaysStyles,
   },
   {
-    date: moment("2022/12/30"),
+    date: moment("2023/04/14"),
+    ...closedDaysStyles,
+  },
+  {
+    date: moment("2023/04/19"),
+    ...closedDaysStyles,
+  },
+  {
+    date: moment("2023/04/21"),
+    ...closedDaysStyles,
+  },
+  {
+    date: moment("2023/04/22"),
+    ...closedDaysStyles,
+  },
+  {
+    date: moment("2023/04/23"),
+    ...closedDaysStyles,
+  },
+  {
+    date: moment("2023/05/1"),
+    ...closedDaysStyles,
+  },
+  {
+    date: moment("2023/05/4"),
+    ...closedDaysStyles,
+  },
+  {
+    date: moment("2023/06/28"),
+    ...closedDaysStyles,
+  },
+  {
+    date: moment("2023/06/29"),
+    ...closedDaysStyles,
+  },
+  {
+    date: moment("2023/06/30"),
+    ...closedDaysStyles,
+  },
+  {
+    date: moment("2023/07/29"),
+    ...closedDaysStyles,
+  },
+  {
+    date: moment("2023/08/15"),
+    ...closedDaysStyles,
+  },
+  {
+    date: moment("2023/09/6"),
+    ...closedDaysStyles,
+  },
+  {
+    date: moment("2023/09/28"),
+    ...closedDaysStyles,
+  },
+  {
+    date: moment("2023/10/24"),
+    ...closedDaysStyles,
+  },
+  {
+    date: moment("2023/12/16"),
+    ...closedDaysStyles,
+  },
+  {
+    date: moment("2023/12/25"),
     ...closedDaysStyles,
   },
 ];
